@@ -7,6 +7,11 @@ function graph(g){
   document.write(markup);
 }
 
+input[0][0] = 1;
+input[0][input.length-1] = 1;
+input[input.length-1][0] = 1;
+input[input.length-1][input.length-1] = 1;
+
 function step(input) {
   return input.map(function(row,y,a){
     var newRow = [];
@@ -24,16 +29,21 @@ function step(input) {
         newRow.push((score == 3) ? 1 : 0);
       }
     }
+    if(y==0 || y==a.length-1) {
+      newRow[0] = 1;
+      newRow[newRow.length-1] = 1;
+    }
     return newRow;
   });
 }
 
 var next = input;
 
-for(var i=0; i<4; i++) {
+for(var i=0; i<steps; i++) {
   var next = step(next);
 }
 
+console.log(next.reduce((a,b)=>a+b.reduce((a,b)=>a+b),0));
 graph(next);
 
 
