@@ -2,7 +2,9 @@ var http = require('http'),
     fs = require('fs');
 
 function page(input,steps){
-  var page = '<!doctype html><html><head><meta charset="utf-8" /><title>Lights</title></head><body>'
+  var page = '<!doctype html><html><head><meta charset="utf-8" /><title>Lights</title>'
+           + '<style>body{color:#ffd; background:#006;} </style>'
+           + '</head><body><canvas id="game" width="400" height="400"></canvas>'
            + '<script type="text/javascript">\n'
            + 'var steps = ' + steps + ';\n'
            + 'var input = ' + JSON.stringify(input) + ';\n'
