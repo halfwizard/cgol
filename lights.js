@@ -1,9 +1,9 @@
 var stuckLights = false,
-    solid = false;  
+    solid = true;
 
 var canvas = document.querySelector('#game'),
     ctx = canvas.getContext('2d');
-    
+
 function draw(input) {
   var alpha = 5/steps;
   if(solid) ctx.clearRect(0, 0, canvas.width, canvas.height), alpha = 1;
@@ -37,7 +37,7 @@ if(stuckLights) {
 function step(input) {
   return input.map(function(row,y,a){
     var newRow = [];
-  
+
     for(var x=0;x<row.length;x++) {
       var score = 0;
       for(var v=y-1;v<=y+1;v++) {
@@ -69,11 +69,12 @@ var interval = window.setInterval(function(){
   next = step(next);
   i++;
   if(i>steps) clearInterval(interval), console.log(next.reduce((a,b)=>a+b.reduce((a,b)=>a+((b!=0)?1:0)),0));
-},25);
+},50);
 
+var obj = document.querySelector('#game');
+obj.addEventListener('mousedown',function(e){
+  next[Math.floor(e.clientY/4)][Math.floor(e.clientX/4)] = 2;
+
+  console.log(e.clientX,e.clientY)
+});
 //console.log(next.reduce((a,b)=>a+b.reduce((a,b)=>a+b),0));
-
-
-
-
-

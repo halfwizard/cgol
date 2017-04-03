@@ -14,7 +14,7 @@ function page(input,steps){
 }
 
 http.createServer(function(req,res){
-  res.writeHead({'Content-type': "text/html"});
+  //res.writeHead({'Content-type': "text/html"});
   var route = req.url.match((/(\w+):(\d+)/));
   if(route) {
     var input = fs.readFileSync(route[1],'utf8').replace(/\./g,'0').replace(/#/g,'1').split("\n").filter(s=>s.length>0).map(s=>s.split('').map(n=>+n)),
@@ -26,4 +26,3 @@ http.createServer(function(req,res){
   }
 }).listen(3000,"127.0.0.1");
 console.log("listening on 127.0.0.1:3000");
-      
